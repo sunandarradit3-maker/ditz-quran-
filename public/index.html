@@ -1,1 +1,118 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DiTz LINGUA - platform belajar bahasa negara dengan materi dinamis, quiz, audio, progress, dan komentar public." />
+  <title>DiTz LINGUA</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <nav class="container nav">
+      <a href="/" class="logo" aria-label="Home">
+        <span class="logo-mark">DL</span>
+        <span id="brandName">DiTz LINGUA</span>
+      </a>
+      <div class="nav-actions">
+        <a class="btn small" href="#languages">Bahasa</a>
+        <a class="btn small" href="#comments">Komentar Public</a>
+        <button class="btn small" id="themeToggle" type="button">🌗 Tema</button>
+        <a class="btn small primary" href="/admin.html">Admin</a>
+      </div>
+    </nav>
+  </header>
 
+  <main>
+    <section class="container hero" id="home">
+      <div>
+        <div class="kicker" id="announcement">Mode belajar dinamis aktif.</div>
+        <h1 class="gradient-text" id="heroTitle">Belajar Semua Bahasa Negara Dari Nol Sampai Lancar</h1>
+        <p id="heroSubtitle">Materi, kosakata, quiz acak, audio pronunciation, progress belajar, dan komentar public yang bisa dibalas admin.</p>
+        <div class="hero-actions">
+          <a class="btn primary" id="primaryCTA" href="#languages">Mulai Belajar</a>
+          <a class="btn" id="secondaryCTA" href="#learn">Lihat Bahasa</a>
+        </div>
+      </div>
+      <aside class="orb-card" aria-label="Statistik platform">
+        <div class="stat-grid">
+          <div class="stat"><b id="statLanguages">0</b><span>Bahasa aktif</span></div>
+          <div class="stat"><b id="statLessons">0</b><span>Materi</span></div>
+          <div class="stat"><b id="statVocab">0</b><span>Kosakata</span></div>
+          <div class="stat"><b id="statQuiz">0</b><span>Quiz dinamis</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="container section" id="languages">
+      <div class="section-head">
+        <div>
+          <h2>Bahasa Negara</h2>
+          <p class="lead">Pilih bahasa, pelajari materi, dengar pelafalan, kerjakan quiz acak, lalu diskusi di komentar public.</p>
+        </div>
+      </div>
+      <div class="controls">
+        <input class="input" id="searchInput" placeholder="Cari bahasa, negara, atau native name..." />
+        <select class="select" id="levelFilter">
+          <option value="all">Semua level</option>
+          <option>Pemula</option>
+          <option>Menengah</option>
+          <option>Mahir</option>
+        </select>
+      </div>
+      <div class="grid languages-grid" id="languageGrid"></div>
+    </section>
+
+    <section class="container section" id="learn">
+      <div class="section-head">
+        <div>
+          <h2>Ruang Belajar</h2>
+          <p class="lead" id="learnLead">Pilih salah satu bahasa untuk membuka materi belajar.</p>
+        </div>
+      </div>
+      <div class="learn-shell">
+        <aside class="card sidebar">
+          <h3 id="selectedLanguageTitle">Belum memilih bahasa</h3>
+          <p class="lead" id="selectedLanguageInfo">Klik kartu bahasa di atas.</p>
+          <div class="progressbar" title="Progress lokal tersimpan di browser"><i id="languageProgress"></i></div>
+          <div class="lesson-list" id="lessonList" style="margin-top:16px"></div>
+        </aside>
+        <article class="card lesson-main" id="lessonMain">
+          <div class="empty">Materi akan muncul di sini setelah kamu memilih bahasa.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section" id="comments">
+      <div class="section-head">
+        <div>
+          <h2>Komentar Public</h2>
+          <p class="lead">Semua pengunjung bisa komentar. Admin bisa membalas dan balasannya tampil public.</p>
+        </div>
+      </div>
+      <div class="comments-layout">
+        <form class="card" id="commentForm">
+          <h3>Tulis Komentar</h3>
+          <p class="lead">Komentar bisa untuk diskusi umum atau bahasa yang sedang dipilih.</p>
+          <input class="input" name="name" placeholder="Nama kamu" required maxlength="80" />
+          <textarea class="textarea" name="text" placeholder="Tulis pertanyaan / komentar kamu..." required maxlength="1000"></textarea>
+          <select class="select" name="scope" id="commentScope">
+            <option value="global">Diskusi global</option>
+            <option value="language">Bahasa yang dipilih</option>
+          </select>
+          <button class="btn primary" style="width:100%; margin-top:12px" type="submit">Kirim ke Public</button>
+        </form>
+        <div class="comment-list" id="commentList"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <p id="footerText">Dibuat untuk belajar bahasa dunia secara fleksibel, modern, dan bisa diedit dari admin panel.</p>
+    <p><span id="supportLine"></span></p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="/scripts/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel - DiTz LINGUA</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="admin-body">
+  <section class="login-screen" id="loginScreen">
+    <form class="card login-card" id="loginForm">
+      <div class="logo"><span class="logo-mark">DL</span><span>DiTz LINGUA Admin</span></div>
+      <h1 style="letter-spacing:-.06em">Masuk Admin Panel</h1>
+      <p class="lead">Masukkan PIN untuk mengatur semua tulisan website, bahasa, materi, quiz training, dan komentar public.</p>
+      <input class="input" name="pin" type="password" placeholder="PIN Admin" required autofocus />
+      <button class="btn primary" style="width:100%; margin-top:12px" type="submit">Login</button>
+      <a class="btn" style="width:100%; margin-top:10px" href="/">Kembali ke Website</a>
+    </form>
+  </section>
+
+  <main class="admin-layout hidden" id="adminApp">
+    <aside class="admin-sidebar">
+      <a class="logo" href="/admin.html"><span class="logo-mark">DL</span><span>Admin Panel</span></a>
+      <p class="lead">Kontrol penuh semua data website tanpa edit coding.</p>
+      <nav class="admin-nav" id="adminNav">
+        <button data-tab="dashboard" class="active">Dashboard</button>
+        <button data-tab="settings">Tulisan Website</button>
+        <button data-tab="languages">Bahasa</button>
+        <button data-tab="lessons">Materi</button>
+        <button data-tab="vocabulary">Kosakata</button>
+        <button data-tab="quizzes">Quiz Training</button>
+        <button data-tab="comments">Komentar Public</button>
+      </nav>
+      <button class="btn danger" id="logoutBtn" style="width:100%; margin-top:18px">Logout</button>
+      <a class="btn" href="/" style="width:100%; margin-top:10px">Lihat Website</a>
+    </aside>
+
+    <section class="admin-main">
+      <section class="admin-section active" data-section="dashboard">
+        <div class="section-head"><div><h2>Dashboard</h2><p class="lead">Ringkasan data DiTz LINGUA.</p></div></div>
+        <div class="stat-grid">
+          <div class="stat"><b id="dashLanguages">0</b><span>Bahasa</span></div>
+          <div class="stat"><b id="dashLessons">0</b><span>Materi</span></div>
+          <div class="stat"><b id="dashVocab">0</b><span>Kosakata</span></div>
+          <div class="stat"><b id="dashQuiz">0</b><span>Quiz</span></div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <h3>Fitur Canggih Aktif</h3>
+          <p class="lead">Dynamic content, komentar public real-time via SSE, admin reply, text-to-speech pronunciation, progress lokal, quiz acak, dan AI practice offline.</p>
+        </div>
+      </section>
+
+      <section class="admin-section" data-section="settings">
+        <div class="section-head"><div><h2>Tulisan Website</h2><p class="lead">Semua teks utama homepage bisa diedit di sini.</p></div></div>
+        <form class="card form-grid" id="settingsForm">
+          <input class="input" name="brandName" placeholder="Nama brand" />
+          <input class="input" name="accent" placeholder="Warna accent, contoh #7c3aed" />
+          <input class="input full" name="heroTitle" placeholder="Judul hero" />
+          <textarea class="textarea full" name="heroSubtitle" placeholder="Deskripsi hero"></textarea>
+          <input class="input full" name="announcement" placeholder="Announcement / banner" />
+          <input class="input" name="primaryCTA" placeholder="Tombol utama" />
+          <input class="input" name="secondaryCTA" placeholder="Tombol kedua" />
+          <input class="input" name="supportEmail" placeholder="Email support" />
+          <input class="input" name="whatsapp" placeholder="Nomor WhatsApp" />
+          <textarea class="textarea full" name="footerText" placeholder="Teks footer"></textarea>
+          <button class="btn primary full" type="submit">Simpan Tulisan Website</button>
+        </form>
+      </section>
+
+      <section class="admin-section" data-section="languages">
+        <div class="section-head"><div><h2>Bahasa</h2><p class="lead">Tambah / edit bahasa negara yang tampil di website.</p></div></div>
+        <form class="card form-grid" id="languageForm">
+          <input type="hidden" name="id" />
+          <input class="input" name="name" placeholder="Nama bahasa, contoh English" required />
+          <input class="input" name="nativeName" placeholder="Native name, contoh 日本語" />
+          <input class="input" name="country" placeholder="Negara" />
+          <input class="input" name="flag" placeholder="Emoji bendera, contoh 🇯🇵" />
+          <select class="select" name="level">
+            <option>Pemula</option><option>Menengah</option><option>Mahir</option>
+          </select>
+          <input class="input" name="color" placeholder="Warna kartu, contoh #ef4444" />
+          <textarea class="textarea full" name="description" placeholder="Deskripsi bahasa"></textarea>
+          <label class="pill full"><input type="checkbox" name="active" checked /> Aktif tampil public</label>
+          <button class="btn primary" type="submit">Simpan Bahasa</button>
+          <button class="btn" type="button" id="resetLanguageForm">Reset Form</button>
+        </form>
+        <div class="table" id="languageTable"></div>
+      </section>
+
+      <section class="admin-section" data-section="lessons">
+        <div class="section-head"><div><h2>Materi</h2><p class="lead">Tambah materi belajar untuk masing-masing bahasa.</p></div></div>
+        <form class="card form-grid" id="lessonForm">
+          <input type="hidden" name="id" />
+          <select class="select" name="languageId" required></select>
+          <input class="input" name="title" placeholder="Judul materi" required />
+          <select class="select" name="level"><option>Pemula</option><option>Menengah</option><option>Mahir</option></select>
+          <input class="input" name="order" type="number" placeholder="Urutan" />
+          <textarea class="textarea full" name="content" placeholder="Isi materi"></textarea>
+          <textarea class="textarea full" name="example" placeholder="Contoh kalimat untuk audio"></textarea>
+          <button class="btn primary" type="submit">Simpan Materi</button>
+          <button class="btn" type="button" id="resetLessonForm">Reset Form</button>
+        </form>
+        <div class="table" id="lessonTable"></div>
+      </section>
+
+      <section class="admin-section" data-section="vocabulary">
+        <div class="section-head"><div><h2>Kosakata</h2><p class="lead">Tambah kata, arti, pelafalan, dan contoh kalimat.</p></div></div>
+        <form class="card form-grid" id="vocabForm">
+          <input type="hidden" name="id" />
+          <select class="select" name="languageId" required></select>
+          <select class="select" name="lessonId"><option value="">Semua materi / tidak terikat</option></select>
+          <input class="input" name="word" placeholder="Kata / frasa" required />
+          <input class="input" name="meaning" placeholder="Arti" required />
+          <input class="input" name="pronunciation" placeholder="Cara baca" />
+          <textarea class="textarea full" name="example" placeholder="Contoh kalimat"></textarea>
+          <button class="btn primary" type="submit">Simpan Kosakata</button>
+          <button class="btn" type="button" id="resetVocabForm">Reset Form</button>
+        </form>
+        <div class="table" id="vocabTable"></div>
+      </section>
+
+      <section class="admin-section" data-section="quizzes">
+        <div class="section-head"><div><h2>Quiz Training</h2><p class="lead">Pertanyaan training tidak tetap. Tambah / edit / hapus kapan saja, lalu website akan mengambil quiz secara acak.</p></div></div>
+        <form class="card form-grid" id="quizForm">
+          <input type="hidden" name="id" />
+          <select class="select" name="languageId" required></select>
+          <select class="select" name="difficulty"><option>Easy</option><option>Normal</option><option>Hard</option></select>
+          <input class="input full" name="question" placeholder="Pertanyaan" required />
+          <textarea class="textarea full" name="options" placeholder="Pilihan jawaban pisahkan dengan tanda | contoh: Halo|Terima kasih|Maaf|Makan" required></textarea>
+          <input class="input" name="answerIndex" type="number" min="0" placeholder="Index jawaban benar, mulai dari 0" required />
+          <input class="input" name="explanation" placeholder="Penjelasan jawaban" />
+          <button class="btn primary" type="submit">Simpan Quiz</button>
+          <button class="btn" type="button" id="resetQuizForm">Reset Form</button>
+        </form>
+        <div class="table" id="quizTable"></div>
+      </section>
+
+      <section class="admin-section" data-section="comments">
+        <div class="section-head"><div><h2>Komentar Public</h2><p class="lead">Balas komentar user, sembunyikan, atau hapus komentar.</p></div></div>
+        <div class="table" id="commentTable"></div>
+      </section>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <script src="/scripts/admin.js" defer></script>
+</body>
+</html>
