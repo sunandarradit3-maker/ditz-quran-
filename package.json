@@ -1,0 +1,12 @@
+{
+  "name": "ditz-lingua",
+  "version": "1.0.0",
+  "description": "Website belajar semua bahasa negara dengan admin panel, komentar public, quiz dinamis, audio, dan progress belajar.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["language-learning", "admin-panel", "ditz"],
+  "author": "DiTz STORE",
+  "license": "MIT"
+}
